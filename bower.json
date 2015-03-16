@@ -1,0 +1,12 @@
+{
+  "name": "kawo-tooltip",
+  "version": "1.0.0",
+  "main": "dist/kawo-tooltip.min.js",
+  "ignore": [
+    ".bowerrc",
+    ".gitignore",
+    ".gitattributes",
+    ".git/*",
+    "bower.json"
+  ]
+}

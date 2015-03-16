@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>KAWO Tooltip Examples</title>
+	<meta name="description" content="">
+
+	<style>
+	.box {
+		width: 44px;
+		height: 44px;
+		position: fixed;
+		background-color: #ddd;
+	}
+
+	.top-right {
+		top: 20px;
+		right: 20px;
+	}
+
+	.top-right-70 {
+		top: 20px;
+		right: 70px;
+	}
+
+	.top-center {
+		top: 20px;
+		left: 50%;
+		margin-left: -22px;
+	}
+
+	.top-left {
+		top: 20px;
+		left: 20px;
+	}
+
+	.bottom-right {
+		bottom: 20px;
+		right: 20px;
+	}
+
+	.bottom-center {
+		bottom: 20px;
+		left: 50%;
+		margin-left: -22px;
+	}
+
+	.bottom-left {
+		bottom: 20px;
+		left: 20px;
+	}
+
+	</style>
+
+</head>
+<body>
+
+<div class="box top-right" data-tooltip="top right"></div>
+
+<div class="box top-right-70" data-tooltip="top right 70px"></div>
+
+<div class="box top-center" data-tooltip="top center"></div>
+
+<div class="box top-left" data-tooltip="top left but way way way too much damn text"></div>
+
+<div class="box bottom-right" data-tooltip="bottom right"></div>
+
+<div class="box bottom-center" data-tooltip="bottom center but way way way too much damn text"></div>
+
+<div class="box bottom-left" data-tooltip="bottom left"></div>
+
+<script src="kawo-tooltip.js"></script>
+
+</body>
