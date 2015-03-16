@@ -37,6 +37,7 @@
 		tooltip.style.visibility = 'hidden';
 		tooltip.style.maxWidth = '200px';
 		tooltip.style.zIndex = 1000;
+		tooltip.style.pointerEvents = 'none';
 
 		// ADD SPAN TO TOOLTIP
 		var span = document.createElement( 'span' );
@@ -52,6 +53,7 @@
 		arrow.style.border = '6px solid #333';
 		arrow.style.borderBottomColor = 'transparent';
 		arrow.style.borderRightColor = 'transparent';
+		tooltip.style.pointerEvents = 'none';
 
 		// APPEND ARROW TO TOOLTIP
 		tooltip.appendChild( arrow );
