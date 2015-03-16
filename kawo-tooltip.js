@@ -114,7 +114,8 @@
 					tooltip.style.textAlign = 'right';
 
 					// POSITION TOOLTIP ARROW
-					arrow.style.left = ( center - tooltipLeft - 5 ) + 'px';
+					var arrowPosition = tooltipSize.width - ( targetSize.width / 2 );
+					arrow.style.left = ( arrowPosition - 5 ) + 'px';
 
 
 				// CENTERED
