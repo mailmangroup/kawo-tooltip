@@ -1,5 +1,7 @@
 kawoTooltip
 ===========
+[![kawo-tooltip version](https://img.shields.io/badge/kawo--tooltip-v1.0.3-brightgreen.svg)](https://github.com/mailmangroup/kawo-tooltip/) [![License](http://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+
 
 We wanted a super simple, zero config options, declarative tooltip library with no dependencies. We couldn't find one, so we wrote our own.
 
