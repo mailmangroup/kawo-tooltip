@@ -28,14 +28,9 @@
 		var tooltip = document.createElement( 'div' );
 
 		// TOOLTIP BASE STYLES
+		tooltip.className = 'kawo-tooltip';
 		tooltip.style.position = 'fixed';
-		tooltip.style.padding = '5px 8px';
-		tooltip.style.fontSize = '14px';
-		tooltip.style.color = '#fff';
-		tooltip.style.backgroundColor = '#333';
-		tooltip.style.borderRadius = '2px';
 		tooltip.style.visibility = 'hidden';
-		tooltip.style.maxWidth = '200px';
 		tooltip.style.zIndex = 1000;
 		tooltip.style.pointerEvents = 'none';
 
@@ -47,12 +42,10 @@
 		var arrow = document.createElement( 'div' );
 
 		// ARROW BASE STYLES
+		arrow.className = 'kawo-tooltip-arrow';
 		arrow.style.width = 0;
 		arrow.style.height = 0;
 		arrow.style.position = 'absolute';
-		arrow.style.border = '6px solid #333';
-		arrow.style.borderBottomColor = 'transparent';
-		arrow.style.borderRightColor = 'transparent';
 		tooltip.style.pointerEvents = 'none';
 
 		// APPEND ARROW TO TOOLTIP
