@@ -1,19 +1,20 @@
 /*
  * KAWO Tooltip
  * Author: Alex Duncan
+ * Version: 1.0.5
  *
  * No dependencies and zero config options, super simple declarative tooltip library.
  */
 (function ( root, factory ) {
 
-    // AMD
+	// AMD
 	if ( typeof define === 'function' && define.amd ) define( [], factory );
 
-    // COMMONJS
+	// COMMONJS
 	else if ( typeof exports === 'object' ) module.exports = factory();
 
 	// BROWSER GLOBAL
-    else root.kawoTooltip = factory();
+	else root.kawoTooltip = factory();
 
 }( this, function () {
 	'use strict';
@@ -132,6 +133,7 @@
 					tooltip.style.top = ( targetSize.top -  tooltipSize.height - 5 ) + 'px';
 
 					// POSITION ARROW BELOW TOOLTIP
+					arrow.style.msTransform = 'rotate(-135deg)';
 					arrow.style.transform = 'rotate(-135deg)';
 					arrow.style.top = 'auto';
 					arrow.style.bottom = '-5px';
@@ -143,6 +145,7 @@
 					tooltip.style.top = ( targetSize.bottom + 5 ) + 'px';
 
 					// POSITION ARROW ABOVE TOOLTIP
+					arrow.style.msTransform = 'rotate(45deg)';
 					arrow.style.transform = 'rotate(45deg)';
 					arrow.style.top = '-5px';
 					arrow.style.bottom = 'auto';

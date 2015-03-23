@@ -13,6 +13,7 @@ $ bower install kawo-tooltip
 ```
 
 ### RequireJS
+The tooltip self-initializes so all you need to do is require it.
 ```javascript
 require.config({
 	paths: {
@@ -60,7 +61,7 @@ By default `kawo-tooltip.js` only defines essential styles. Both the tooltip and
 }
 ```
 
-For reference the tooltip HTML looks like this:
+For reference when writing your CSS styles; this is what the tooltip HTML looks like:
 ```html
 <div class="kawo-tooltip" style="[...]">
 	<span> ...content from data-tooltip attribute goes here... </span>
