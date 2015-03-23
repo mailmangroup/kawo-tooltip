@@ -1,6 +1,6 @@
 kawoTooltip
 ===========
-[![kawo-tooltip version](https://img.shields.io/badge/kawo--tooltip-v1.0.5-brightgreen.svg)](https://github.com/mailmangroup/kawo-tooltip/) [![License](http://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+[![kawo-tooltip version](https://img.shields.io/badge/kawo--tooltip-v1.1.0-brightgreen.svg)](https://github.com/mailmangroup/kawo-tooltip/) [![License](http://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 We wanted a super simple, zero config options, declarative tooltip library with no dependencies. We couldn't find one, so we wrote our own.
 
@@ -53,6 +53,11 @@ By default `kawo-tooltip.js` only defines essential styles. Both the tooltip and
 	font-size: 14px;
 	color: #fff;
 	background-color: #333;
+	visibility: hidden;
+}
+
+.kawo-tooltip.kawo-visible {
+	visibility: visible;
 }
 
 .kawo-tooltip-arrow {

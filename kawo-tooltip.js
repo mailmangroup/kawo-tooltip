@@ -29,9 +29,7 @@
 		var tooltip = document.createElement( 'div' );
 
 		// TOOLTIP BASE STYLES
-		tooltip.className = 'kawo-tooltip';
 		tooltip.style.position = 'fixed';
-		tooltip.style.visibility = 'hidden';
 		tooltip.style.zIndex = 1000;
 		tooltip.style.pointerEvents = 'none';
 
@@ -51,6 +49,16 @@
 
 		// APPEND ARROW TO TOOLTIP
 		tooltip.appendChild( arrow );
+
+		// ADD setClassName TO TOOLTIP PROTOTYPE
+		tooltip.__proto__.setClassName = function( visible ) {
+
+			tooltip.className = 'kawo-tooltip' + ( visible ? ' kawo-visible' : '' ) + ( arrow.style.top === 'auto' ? ' kawo-tooltip-top' : '' );
+			visible = visible;
+
+		};
+
+		tooltip.setClassName( false );
 
 		// ADD TOOLTIP TO DOM
 		document.body.appendChild( tooltip );
@@ -72,8 +80,7 @@
 				// TOOLTIP NOT VISIBLE › FADEIN AFTER TIMEOUT
 				if ( !visible ) showTimeout = setTimeout(function(){
 
-					tooltip.style.visibility = 'visible';
-					visible = true;
+					tooltip.setClassName( true );
 
 				}, 500 );
 
@@ -169,8 +176,7 @@
 				// SET TIMEOUT › HIDE TOOLTIP
 				hideTimeout = setTimeout(function(){
 
-					tooltip.style.visibility = 'hidden';
-					visible = false;
+					tooltip.setClassName( false );
 
 				}, 500 );
 			}

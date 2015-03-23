@@ -21,7 +21,25 @@
 		font-size: 14px;
 		color: #fff;
 		background-color: #333;
-		border-radius: 2px;
+		border-radius: 3px;
+		transition: visibility 0s linear 300ms, transform 300ms, opacity 300ms;
+		visibility: hidden;
+		-webkit-transform: translateY(10px);
+		transform: translateY(10px);
+		opacity: 0;
+	}
+
+	.kawo-tooltip-top {
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+
+	.kawo-tooltip.kawo-visible {
+		transition: visibility 0s linear 0s, transform 300ms, opacity 300ms;
+		visibility: visible;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		opacity: 1;
 	}
 
 	.kawo-tooltip-arrow {
