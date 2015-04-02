@@ -197,13 +197,13 @@
 				hideTooltip();
 			}
 		});
-	
-		// ON SCROLL › HIDE TOOLTIP
-		window.addEventListener( 'scroll', function(){
+		
+		// ON MAIN WINDOW SCROLL › HIDE TOOLTIP
+		document.addEventListener( 'wheel', function(){
 			if ( visible && targetPosition != 'fixed' ) {
 				hideTooltip();
 			}
-		});
+		});		
 
 	}();
 
