@@ -186,20 +186,21 @@
 		// -------------------------------------------------------------------------------		
 		
 		// ON CLICK › HIDE TOOLTIP
-		window.onclick = function() {
+		
+		document.body.addEventListener( 'click', function(){
 			if ( visible ) {
 				tooltip.style.visibility = 'hidden';
 				visible = false;
 			}
-		}
+		});
 	
 		// ON SCROLL › HIDE TOOLTIP
-		window.onscroll = function() {
+		window.addEventListener( 'scroll', function(){
 			if ( visible && targetPosition != 'fixed' ) {
 				tooltip.style.visibility = 'hidden';
 				visible = false;
 			}
-		}
+		});
 
 	}();
 
