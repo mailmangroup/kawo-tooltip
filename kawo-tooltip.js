@@ -180,6 +180,19 @@
 			}
 
 		}, true );
+		
+		
+		// HIDE TOOLTIP ON SCROLL OR CLICK
+		// -------------------------------------------------------------------------------		
+		
+		// ON CLICK › HIDE TOOLTIP
+		window.onclick = function() {
+			if ( visible ) {
+				tooltip.style.visiblity = 'hidden';
+				visible = false;
+			}
+		}
+	
 
 	}();
 
