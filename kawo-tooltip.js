@@ -23,6 +23,7 @@
 
 		var showTimeout,
 			hideTimeout,
+			targetPosition,
 			visible = false;
 
 		// CREATE HIDDEN TOOLTIP ELEMENT
@@ -62,7 +63,10 @@
 
 			// TARGET HAS 'data-tooltip' ATTRIBUTE
 			if ( e.target.hasAttribute( 'data-tooltip' ) ) {
-
+				
+				// TEST TARGET CSS POSITION				
+				targetPosition = window.getComputedStyle(e.target).getPropertyValue('position');
+										
 				// BLUR TIMEOUT SET › CLEAR IT
 				if ( hideTimeout ) {
 					clearTimeout( hideTimeout );
@@ -133,6 +137,7 @@
 					tooltip.style.top = ( targetSize.top -  tooltipSize.height - 5 ) + 'px';
 
 					// POSITION ARROW BELOW TOOLTIP
+					arrow.style.webkitTransform = 'rotate(-135deg)';
 					arrow.style.msTransform = 'rotate(-135deg)';
 					arrow.style.transform = 'rotate(-135deg)';
 					arrow.style.top = 'auto';
@@ -145,6 +150,7 @@
 					tooltip.style.top = ( targetSize.bottom + 5 ) + 'px';
 
 					// POSITION ARROW ABOVE TOOLTIP
+					arrow.style.webkitTransform = 'rotate(45deg)';
 					arrow.style.msTransform = 'rotate(45deg)';
 					arrow.style.transform = 'rotate(45deg)';
 					arrow.style.top = '-5px';
@@ -154,7 +160,13 @@
 			}
 
 		}, true );
-
+		
+		// DECLARE HIDE TOOLTIP FUNCTION
+		var hideTooltip = function hideTooltip () {
+			tooltip.style.visibility = 'hidden';
+			visible = false;
+		};
+		
 
 		// LISTEN TO MOUSELEAVE EVENT
 		// -------------------------------------------------------------------------------
@@ -169,13 +181,31 @@
 				// SET TIMEOUT › HIDE TOOLTIP
 				hideTimeout = setTimeout(function(){
 
-					tooltip.style.visibility = 'hidden';
-					visible = false;
+					hideTooltip();
 
 				}, 500 );
 			}
 
 		}, true );
+		
+		
+		// HIDE TOOLTIP ON SCROLL OR CLICK
+		// -------------------------------------------------------------------------------		
+		
+		// ON CLICK › HIDE TOOLTIP
+		
+		document.body.addEventListener( 'click', function(){
+			if ( visible ) {
+				hideTooltip();
+			}
+		});
+		
+		// ON MAIN WINDOW SCROLL › HIDE TOOLTIP
+		document.addEventListener( 'wheel', function(){
+			if ( visible && targetPosition != 'fixed' ) {
+				hideTooltip();
+			}
+		});		
 
 	}();
 
