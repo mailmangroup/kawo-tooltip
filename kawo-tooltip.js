@@ -137,6 +137,7 @@
 					tooltip.style.top = ( targetSize.top -  tooltipSize.height - 5 ) + 'px';
 
 					// POSITION ARROW BELOW TOOLTIP
+					arrow.style.webkitTransform = 'rotate(-135deg)';
 					arrow.style.msTransform = 'rotate(-135deg)';
 					arrow.style.transform = 'rotate(-135deg)';
 					arrow.style.top = 'auto';
@@ -149,6 +150,7 @@
 					tooltip.style.top = ( targetSize.bottom + 5 ) + 'px';
 
 					// POSITION ARROW ABOVE TOOLTIP
+					arrow.style.webkitTransform = 'rotate(45deg)';
 					arrow.style.msTransform = 'rotate(45deg)';
 					arrow.style.transform = 'rotate(45deg)';
 					arrow.style.top = '-5px';
