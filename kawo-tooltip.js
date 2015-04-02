@@ -21,6 +21,9 @@
 
 	return function() {
 
+		// TOUCH DEVICE › DON'T SHOW TOOLTIPS
+		if ( 'ontouchstart' in document.documentElement ) return;
+
 		var showTimeout,
 			hideTimeout,
 			visible = false;
