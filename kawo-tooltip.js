@@ -188,7 +188,7 @@
 		// ON CLICK › HIDE TOOLTIP
 		window.onclick = function() {
 			if ( visible ) {
-				tooltip.style.visiblity = 'hidden';
+				tooltip.style.visibility = 'hidden';
 				visible = false;
 			}
 		}
