@@ -23,6 +23,7 @@
 
 		var showTimeout,
 			hideTimeout,
+			targetPosition,
 			visible = false;
 
 		// CREATE HIDDEN TOOLTIP ELEMENT
@@ -62,7 +63,10 @@
 
 			// TARGET HAS 'data-tooltip' ATTRIBUTE
 			if ( e.target.hasAttribute( 'data-tooltip' ) ) {
-
+				
+				// TEST TARGET CSS POSITION				
+				targetPosition = window.getComputedStyle(e.target).getPropertyValue('position');
+										
 				// BLUR TIMEOUT SET › CLEAR IT
 				if ( hideTimeout ) {
 					clearTimeout( hideTimeout );
