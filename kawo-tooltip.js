@@ -193,6 +193,13 @@
 			}
 		}
 	
+		// ON SCROLL › HIDE TOOLTIP
+		window.onscroll = function() {
+			if ( visible && targetPosition != 'fixed' ) {
+				tooltip.style.visibility = 'hidden';
+				visible = false;
+			}
+		}
 
 	}();
 
