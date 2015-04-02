@@ -158,7 +158,13 @@
 			}
 
 		}, true );
-
+		
+		// DECLARE HIDE TOOLTIP FUNCTION
+		var hideTooltip = function hideTooltip () {
+			tooltip.style.visibility = 'hidden';
+			visible = false;
+		};
+		
 
 		// LISTEN TO MOUSELEAVE EVENT
 		// -------------------------------------------------------------------------------
@@ -173,8 +179,7 @@
 				// SET TIMEOUT › HIDE TOOLTIP
 				hideTimeout = setTimeout(function(){
 
-					tooltip.style.visibility = 'hidden';
-					visible = false;
+					hideTooltip();
 
 				}, 500 );
 			}
@@ -189,16 +194,14 @@
 		
 		document.body.addEventListener( 'click', function(){
 			if ( visible ) {
-				tooltip.style.visibility = 'hidden';
-				visible = false;
+				hideTooltip();
 			}
 		});
 	
 		// ON SCROLL › HIDE TOOLTIP
 		window.addEventListener( 'scroll', function(){
 			if ( visible && targetPosition != 'fixed' ) {
-				tooltip.style.visibility = 'hidden';
-				visible = false;
+				hideTooltip();
 			}
 		});
 
