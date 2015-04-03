@@ -1,7 +1,7 @@
 /*
  * KAWO Tooltip
  * Author: Alex Duncan
- * Version: 1.0.5
+ * Version: 1.0.6
  *
  * No dependencies and zero config options, super simple declarative tooltip library.
  */
