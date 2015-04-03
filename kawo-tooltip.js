@@ -23,6 +23,7 @@
 
 		var showTimeout,
 			hideTimeout,
+			targetPosition,
 			visible = false;
 
 		// CREATE HIDDEN TOOLTIP ELEMENT
@@ -56,12 +57,49 @@
 		document.body.appendChild( tooltip );
 
 
+		// FUNCTION : POSITION HORIZONTAL
+		// -----------------------------------------------------------------------
+		var positionHorizontal = function( left, right, align, arrowLeft ) {
+
+			tooltip.style.left = left;
+			tooltip.style.right = right;
+			tooltip.style.textAlign = align;
+
+			arrow.style.left = arrowLeft + 'px';
+		};
+
+
+		// FUNCTION : POSITION VERTICAL
+		// -----------------------------------------------------------------------
+		var positionVertical = function( tooltipTop, rotation, top, bottom ) {
+
+			tooltip.style.top = tooltipTop + 'px';
+
+			arrow.style.webkitTransform = 'rotate(' + rotation + 'deg)';
+			arrow.style.msTransform = 'rotate(' + rotation + 'deg)';
+			arrow.style.transform = 'rotate(' + rotation + 'deg)';
+			arrow.style.top = top;
+			arrow.style.bottom = bottom;
+		};
+
+
+		// FUNCTION : HIDE TOOLTIP
+		// -----------------------------------------------------------------------
+		var hideTooltip = function() {
+			tooltip.style.visibility = 'hidden';
+			visible = false;
+		};
+
+
 		// LISTEN TO MOUSEENTER EVENT
 		// -------------------------------------------------------------------------------
 		document.body.addEventListener( 'mouseenter', function( e ){
 
 			// TARGET HAS 'data-tooltip' ATTRIBUTE
 			if ( e.target.hasAttribute( 'data-tooltip' ) ) {
+
+				// TEST TARGET CSS POSITION
+				targetPosition = window.getComputedStyle(e.target).getPropertyValue('position');
 
 				// BLUR TIMEOUT SET › CLEAR IT
 				if ( hideTimeout ) {
@@ -89,67 +127,32 @@
 				// CALCULATE CENTER OF TARGET
 				var center = targetSize.left + ( targetSize.width / 2 );
 
-				// OFF LEFT SIDE OF SCREEN › SHIFT RIGHT ONTO SCREEN
+				// IF OFF LEFT SIDE OF SCREEN › SHIFT RIGHT ONTO SCREEN
 				// -----------------------------------------------------------------------
-				if ( ( tooltipSize.width / 2 ) > ( center - 20 ) ) {
-
-					tooltip.style.left = '20px';
-					tooltip.style.textAlign = 'left';
-					tooltip.style.right = 'auto';
-
-					// POSITION TOOLTIP ARROW
-					arrow.style.left = ( center - 25 ) + 'px';
+				if ( ( tooltipSize.width / 2 ) > ( center - 20 ) )
+					positionHorizontal( '20px', 'auto', 'left', ( center - 25 ) );
 
 
-				// OFF RIGHT SIDE OF SCREEN › SHIFT LEFT ONTO SCREEN
+				// IF OFF RIGHT SIDE OF SCREEN › SHIFT LEFT ONTO SCREEN
 				// -----------------------------------------------------------------------
-				} else if ( ( center + tooltipSize.width / 2 ) > window.innerWidth - 20 ) {
-
-					tooltip.style.left = 'auto';
-					tooltip.style.right = '20px';
-					tooltip.style.textAlign = 'right';
-
-					// POSITION TOOLTIP ARROW
-					var arrowPosition = tooltipSize.width - ( targetSize.width / 2 );
-					arrow.style.left = ( arrowPosition - 5 ) + 'px';
+				else if ( ( center + tooltipSize.width / 2 ) > window.innerWidth - 20 )
+					positionHorizontal( 'auto', '20px', 'right', ( ( tooltipSize.width - ( targetSize.width / 2 ) ) - 5 ) );
 
 
-				// CENTERED
+				// ELSE › CENTERED
 				// -----------------------------------------------------------------------
-				} else {
+				else positionHorizontal( ( center - ( tooltipSize.width / 2 ) ) + 'px', 'auto', 'center', ( ( tooltipSize.width / 2 ) - 5 ) );
 
-					tooltip.style.left = ( center - ( tooltipSize.width / 2 ) ) + 'px';
-					tooltip.style.right = 'auto';
-					tooltip.style.textAlign = 'center';
 
-					// POSITION TOOLTIP ARROW
-					arrow.style.left = ( ( tooltipSize.width / 2 ) - 5 ) + 'px';
-
-				}
-
-				// OFF BOTTOM OF SCREEN › ABOVE ELEMENT
+				// IF OFF BOTTOM OF SCREEN › POSITION ARROW ABOVE ELEMENT
 				// -----------------------------------------------------------------------
-				if ( ( targetSize.bottom + tooltipSize.height ) > window.innerHeight ) {
-					tooltip.style.top = ( targetSize.top -  tooltipSize.height - 5 ) + 'px';
-
-					// POSITION ARROW BELOW TOOLTIP
-					arrow.style.msTransform = 'rotate(-135deg)';
-					arrow.style.transform = 'rotate(-135deg)';
-					arrow.style.top = 'auto';
-					arrow.style.bottom = '-5px';
+				if ( ( targetSize.bottom + tooltipSize.height ) > window.innerHeight )
+					positionVertical( ( targetSize.top -  tooltipSize.height - 5 ), '-135', 'auto', '-5px' );
 
 
-				// BELOW ELEMENT
+				// ELSE › POSITION ARROW BELOW TOOLTIP
 				// -----------------------------------------------------------------------
-				} else {
-					tooltip.style.top = ( targetSize.bottom + 5 ) + 'px';
-
-					// POSITION ARROW ABOVE TOOLTIP
-					arrow.style.msTransform = 'rotate(45deg)';
-					arrow.style.transform = 'rotate(45deg)';
-					arrow.style.top = '-5px';
-					arrow.style.bottom = 'auto';
-				}
+				else positionVertical( ( targetSize.bottom + 5 ), '45', '-5px', 'auto' );
 
 			}
 
@@ -163,19 +166,20 @@
 			// IF A TIMEOUT IS SET CLEAR IT
 			if ( showTimeout ) clearTimeout( showTimeout );
 
-			// IF A TOOLTIP IS VISIBLE & NO TIMEOUT
-			if ( visible && !hideTimeout ) {
-
-				// SET TIMEOUT › HIDE TOOLTIP
-				hideTimeout = setTimeout(function(){
-
-					tooltip.style.visibility = 'hidden';
-					visible = false;
-
-				}, 500 );
-			}
+			// IF A TOOLTIP IS VISIBLE & NO TIMEOUT › SET TIMEOUT
+			if ( visible && !hideTimeout ) hideTimeout = setTimeout( hideTooltip, 500 );
 
 		}, true );
+
+		// ON CLICK › HIDE TOOLTIP
+		document.body.addEventListener( 'click', hideTooltip );
+
+		// ON MAIN WINDOW SCROLL › HIDE TOOLTIP
+		document.addEventListener( 'wheel', function(){
+
+			if ( targetPosition != 'fixed' ) hideTooltip();
+
+		});
 
 	}();
 
