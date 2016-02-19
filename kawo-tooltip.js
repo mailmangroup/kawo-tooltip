@@ -127,6 +127,8 @@
 				// CALCULATE CENTER OF TARGET
 				var center = targetSize.left + ( targetSize.width / 2 );
 
+				var tooltipPosition = e.target.getAttribute( 'data-tooltip-position' );
+
 				// IF OFF LEFT SIDE OF SCREEN › SHIFT RIGHT ONTO SCREEN
 				// -----------------------------------------------------------------------
 				if ( ( tooltipSize.width / 2 ) > ( center - 20 ) )
@@ -146,7 +148,7 @@
 
 				// IF OFF BOTTOM OF SCREEN › POSITION ARROW ABOVE ELEMENT
 				// -----------------------------------------------------------------------
-				if ( ( targetSize.bottom + tooltipSize.height ) > window.innerHeight )
+				if ( tooltipPosition === 'top' || ( targetSize.bottom + tooltipSize.height ) > window.innerHeight && tooltipPosition != 'bottom' )
 					positionVertical( ( targetSize.top -  tooltipSize.height - 5 ), '-135', 'auto', '-5px' );
 
 
