@@ -2,19 +2,38 @@
 	"name": "kawo-tooltip",
 	"version": "2.0.0",
 	"author": "Alex Duncan <alex@kawo.com>",
-	"main": "dist/kawo-tooltip.min.js",
-	"devDependencies": {
-		"typescript": "4.*"
+	"keywords": [
+		"tooltip"
+	],
+	"license": "MIT",
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"main": "./dist/kawo-tooltip.min.js",
+	"module": "./dist/kawo-tooltip.min.js",
+	"exports": {
+		".": {
+			"import": "./dist/kawo-tooltip.min.js",
+			"require": "./dist/kawo-tooltip.umd.cjs"
+		}
 	},
 	"repository": {
-	"type": "git",
+		"type": "git",
 		"url": "https://github.com/mailmangroup/kawo-tooltip.git"
 	},
-	"keywords": [ "tooltip" ],
-	"license": "MIT",
 	"homepage": "https://github.com/mailmangroup/kawo-tooltip",
 	"bugs": {
 		"url": "https://github.com/mailmangroup/kawo-tooltip/issues"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"typescript": "^4.9.3",
+		"vite": "^4.2.0"
 	},
 	"ignore": [
 		".bowerrc",

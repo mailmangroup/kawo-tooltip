@@ -1,0 +1,14 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnPaste": false,
+	"editor.formatOnType": false,
+	"editor.formatOnSave": true,
+	"editor.formatOnSaveMode": "file",
+	"files.autoSave": "onFocusChange",
+	"editor.fontSize": 10,
+	"editor.insertSpaces": false,
+	"editor.tokenColorCustomizations": {
+		"comments": "#55cc00"
+	},
+	"editor.rulers": [100]
+}
