@@ -17,6 +17,9 @@ const timeoutDelay: number = 500;
 // NUMBER OF PIXELS TO SHIFT TOOLTIP TO AVOID EDGE OF SCREEN
 const viewportMargin: number = 16;
 
+// NUMBER OF PIXELS TO OFFSET ARROW BY
+const arrowCenterOffset: number = 5;
+
 // TOUCH DEVICE › DON'T SHOW TOOLTIPS
 if ('ontouchstart' in w) console.warn('No tooltips on touch devices.');
 
@@ -115,7 +118,7 @@ b.addEventListener(
 			let tooltipTop: number = targetSize.bottom + 3;
 			let tooltipLeft: number = Math.round(center - tooltipSize.width / 2);
 			let tooltipAlign: 'center' | 'left' | 'right' = 'center';
-			let arrowLeft: number = Math.round(tooltipSize.width / 2 - 5);
+			let arrowLeft: number = Math.round(tooltipSize.width / 2 - arrowCenterOffset);
 			let arrowRotation: 45 | -135 = 45;
 
 			// IF TOOLTIP OFF BOTTOM OF SCREEN › POSITION ABOVE TARGET
@@ -128,14 +131,14 @@ b.addEventListener(
 			if (tooltipSize.width / 2 > center - viewportMargin) {
 				tooltipLeft = viewportMargin;
 				tooltipAlign = 'left';
-				arrowLeft = center - viewportMargin - 5;
+				arrowLeft = center - viewportMargin - arrowCenterOffset;
 			}
 
 			// IF OFF RIGHT SIDE OF SCREEN › SHIFT LEFT ONTO SCREEN
 			if (center + tooltipSize.width / 2 > w.innerWidth - viewportMargin) {
 				tooltipLeft = w.innerWidth - tooltipSize.width - viewportMargin;
 				tooltipAlign = 'right';
-				arrowLeft = center - tooltipLeft - 5;
+				arrowLeft = center - tooltipLeft - arrowCenterOffset;
 			}
 
 			// FOR WHATEVER MINOR PERFORMANCE IMPROVEMENT THIS MAY PROVIDE
