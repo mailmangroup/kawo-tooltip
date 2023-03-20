@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>KAWO Tooltip V2</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+
+		<style>
+			/* FORCE BODY HEIGHT TO TEST SCROLLING */
+			body {
+				height: 120vh;
+				font-family: sans-serif;
+			}
+
+			/* RECOMMENDED TOOLTIP STYLES */
+
+			.tt {
+				max-width: 14rem;
+				padding: 0.375rem 0.5rem;
+				font-size: 0.875rem;
+				color: #fff;
+				background-color: #333;
+				border-radius: 0.25rem;
+			}
+
+			.tta {
+				border: 0.375rem solid #333;
+				border-radius: 1px;
+				border-bottom-color: transparent;
+				border-right-color: transparent;
+			}
+
+			/* OPTIONAL EXTRAS TOOLTIP STYLES */
+
+			.tt small {
+				font-size: 12px;
+				color: #ddd;
+			}
+		</style>
+
+		<style>
+			main {
+				margin-top: 25vh;
+				text-align: center;
+				color: #333;
+			}
+
+			p {
+				color: #555;
+			}
+
+			/* EXAMPLE ELEMENT STYLES */
+
+			.box {
+				width: 44px;
+				height: 44px;
+				position: fixed;
+				background-color: #eeeeee;
+				border-radius: 5px;
+			}
+
+			.top-right {
+				top: 20px;
+				right: 20px;
+			}
+
+			.top-right-70 {
+				top: 20px;
+				right: 70px;
+			}
+
+			.top-70-right {
+				top: 70px;
+				right: 20px;
+			}
+
+			.top-center {
+				top: 20px;
+				left: 50%;
+				margin-left: -22px;
+			}
+
+			.top-left {
+				top: 20px;
+				left: 20px;
+			}
+
+			.bottom-right {
+				bottom: 20px;
+				right: 20px;
+			}
+
+			.bottom-center {
+				bottom: 20px;
+				left: 50%;
+				margin-left: -22px;
+			}
+
+			.bottom-left {
+				bottom: 20px;
+				left: 20px;
+			}
+
+			.center-center {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -22px 0 0 -22px;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>KAWO Tooltip</h1>
+			<p>v2.0.0</p>
+		</main>
+
+		<div
+			class="box top-right"
+			data-tooltip="top right"
+		></div>
+
+		<div
+			class="box top-right-70"
+			data-tooltip="top right 70px"
+		></div>
+
+		<div
+			class="box top-70-right"
+			data-tooltip="top 70px right"
+		></div>
+
+		<div
+			class="box top-center"
+			data-tooltip="top center<br /><small>can also contain html tags</small>"
+		></div>
+
+		<div
+			class="box top-left"
+			data-tooltip="top left but<br />way way way<br />too much<br />damn text"
+		></div>
+
+		<div
+			class="box bottom-right"
+			data-tooltip="bottom right"
+		></div>
+
+		<div
+			class="box bottom-center"
+			data-tooltip="bottom center but way way way too much damn text"
+		></div>
+
+		<div
+			class="box bottom-left"
+			data-tooltip="bottom left"
+		></div>
+
+		<div
+			class="box center-center"
+			data-tooltip="center center"
+		></div>
+
+		<script
+			type="module"
+			src="/src/kawo-tooltip.ts"
+		></script>
+	</body>
+</html>
