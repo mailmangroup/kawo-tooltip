@@ -10,17 +10,20 @@
 	"files": [
 		"dist"
 	],
-	"main": "./dist/kawo-tooltip.min.js",
-	"module": "./dist/kawo-tooltip.min.js",
+	"main": "./dist/index.umd.cjs",
+	"module": "./dist/index.js",
 	"exports": {
 		".": {
-			"import": "./dist/kawo-tooltip.min.js",
-			"require": "./dist/kawo-tooltip.umd.cjs"
+			"import": "./dist/index.js",
+			"require": "./dist/index.umd.cjs"
 		}
 	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/mailmangroup/kawo-tooltip.git"
+	},
+	"volta": {
+		"node": "16.19.0"
 	},
 	"homepage": "https://github.com/mailmangroup/kawo-tooltip",
 	"bugs": {
@@ -32,8 +35,9 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"typescript": "^4.9.3",
-		"vite": "^4.2.0"
+		"@types/node": "^20.2.5",
+		"typescript": "^5.0.4",
+		"vite": "^4.3.9"
 	},
 	"ignore": [
 		".bowerrc",
