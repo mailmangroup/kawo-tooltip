@@ -41,7 +41,7 @@ const tooltip: HTMLElement = d.createElement('div');
 const ts: CSSStyleDeclaration = tooltip.style;
 
 // TOOLTIP BASE STYLES
-tooltip.className = 'tt';
+tooltip.className = 'kawo-tooltip';
 ts.position = 'fixed';
 ts.inset = '0 auto auto 0';
 ts.visibility = 'hidden';
@@ -58,7 +58,7 @@ const arrow: HTMLElement = d.createElement('div');
 const as: CSSStyleDeclaration = arrow.style;
 
 // ARROW BASE STYLES
-arrow.className = 'tta';
+arrow.className = 'kawo-tooltip-arrow';
 as.width = '0';
 as.height = '0';
 as.position = 'absolute';
