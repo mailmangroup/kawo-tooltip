@@ -1,36 +1,36 @@
-const i = window, d = document, f = d.body, T = 500, l = 16, g = 5;
+const i = window, u = document, f = u.body, T = 500, r = 16, g = 5;
 "ontouchstart" in i && console.warn("No tooltips on touch devices.");
-let v, r, E, c = !1;
-const o = d.createElement("div"), t = o.style;
+let v, s, E, c = !1;
+const o = u.createElement("div"), t = o.style;
 o.className = "kawo-tooltip";
 t.position = "fixed";
 t.inset = "0 auto auto 0";
 t.visibility = "hidden";
 t.zIndex = "2_147_483_647";
 t.pointerEvents = "none";
-const C = d.createElement("span");
+const C = u.createElement("span");
 o.appendChild(C);
-const b = d.createElement("div"), s = b.style;
+const b = u.createElement("div"), d = b.style;
 b.className = "kawo-tooltip-arrow";
-s.width = "0";
-s.height = "0";
-s.position = "absolute";
+d.width = "0";
+d.height = "0";
+d.position = "absolute";
 o.appendChild(b);
 f.appendChild(o);
 const x = () => {
   t.visibility = "hidden", c = !1;
 };
 f.addEventListener(
-  "mouseover",
+  "mouseenter",
   (L) => {
-    let u = L.target;
-    if (u.hasAttribute("data-tooltip")) {
-      E = i.getComputedStyle(u).getPropertyValue("position"), r && (clearTimeout(r), r = null), c || (v = setTimeout(() => {
+    let n = L.target;
+    if (n.hasAttribute("data-tooltip")) {
+      console.error(n), E = i.getComputedStyle(n).getPropertyValue("position"), s && (clearTimeout(s), s = null), c || (v = setTimeout(() => {
         t.visibility = "visible", c = !0;
-      }, T)), C.innerHTML = u.getAttribute("data-tooltip");
-      let e = o.getBoundingClientRect(), n = u.getBoundingClientRect(), a = Math.round(n.left + n.width / 2), y = n.bottom + 3, p = Math.round(a - e.width / 2), m = "center", h = Math.round(e.width / 2 - g), w = 45;
-      n.bottom + e.height > i.innerHeight && (y = n.top - e.height - 3, w = -135), e.width / 2 > a - l && (p = l, m = "left", h = a - l - g), a + e.width / 2 > i.innerWidth - l && (p = i.innerWidth - e.width - l, m = "right", h = a - p - g), i.requestAnimationFrame(() => {
-        t.transform = `translate( ${p}px, ${y}px )`, t.textAlign = m, s.transform = `rotate(${w}deg)`, s.inset = w > 0 ? `-5px auto auto ${h}px` : `auto auto -5px ${h}px`;
+      }, T)), C.innerHTML = n.getAttribute("data-tooltip");
+      let e = o.getBoundingClientRect(), a = n.getBoundingClientRect(), l = Math.round(a.left + a.width / 2), y = a.bottom + 3, p = Math.round(l - e.width / 2), m = "center", h = Math.round(e.width / 2 - g), w = 45;
+      a.bottom + e.height > i.innerHeight && (y = a.top - e.height - 3, w = -135), e.width / 2 > l - r && (p = r, m = "left", h = l - r - g), l + e.width / 2 > i.innerWidth - r && (p = i.innerWidth - e.width - r, m = "right", h = l - p - g), i.requestAnimationFrame(() => {
+        t.transform = `translate( ${p}px, ${y}px )`, t.textAlign = m, d.transform = `rotate(${w}deg)`, d.inset = w > 0 ? `-5px auto auto ${h}px` : `auto auto -5px ${h}px`;
       });
     }
   },
@@ -39,12 +39,12 @@ f.addEventListener(
 f.addEventListener(
   "mouseleave",
   () => {
-    v && clearTimeout(v), c && !r && (r = setTimeout(x, T));
+    v && clearTimeout(v), c && !s && (s = setTimeout(x, T));
   },
   !0
 );
 f.addEventListener("click", x, !0);
-d.addEventListener(
+u.addEventListener(
   "wheel",
   () => {
     E !== "fixed" && x();

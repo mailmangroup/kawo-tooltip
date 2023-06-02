@@ -79,12 +79,13 @@ const hideTooltip = () => {
 // LISTEN TO MOUSEENTER EVENT TO DISPLAY TOOLTIP
 // -----------------------------------------------------------------------------
 b.addEventListener(
-	'mouseover',
+	'mouseenter',
 	(e: MouseEvent) => {
 		let target: Element = e.target as Element;
 
 		// TARGET HAS 'data-tooltip' ATTRIBUTE
 		if (target.hasAttribute('data-tooltip')) {
+			console.error(target);
 			// TEST TARGET CSS POSITION
 			targetPosition = w.getComputedStyle(target).getPropertyValue('position');
 
