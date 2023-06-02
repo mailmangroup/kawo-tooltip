@@ -1,6 +1,6 @@
 kawoTooltip
 ===========
-[![kawo-tooltip version](https://img.shields.io/badge/kawo--tooltip-v1.0.6-brightgreen.svg)](https://github.com/mailmangroup/kawo-tooltip/) [![License](http://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+[![kawo-tooltip version](https://img.shields.io/badge/kawo--tooltip-v2.0.0-brightgreen.svg)](https://github.com/mailmangroup/kawo-tooltip/) [![License](http://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 We wanted a super simple, zero config options, declarative tooltip library with no dependencies. We couldn't find one, so we wrote our own.
 
@@ -14,17 +14,9 @@ $ bower install kawo-tooltip
 ```
 
 ### RequireJS
-The tooltip self-initializes so all you need to do is require it.
+The tooltip self-initializes so all you need to do is import it.
 ```javascript
-require.config({
-	paths: {
-		kawoTooltip: '../bower_components/kawo-tooltip/dist/kawo-tooltip.min'
-	}
-});
-
-require( [ 'kawoTooltip' ], function() {
-
-});
+import '../bower_components/kawo-tooltip/dist/kawo-tooltip.min';
 ```
 
 ### Basic Script Include
@@ -44,10 +36,12 @@ The `data-tooltip` attribute can contain HTML.
 
 # Styling The Tooltip
 
-By default `kawo-tooltip.js` only defines essential styles. Both the tooltip and the arrow have the classes `.kawo-tooltip` and `.kawo-tooltip-arrow` applied to them so you can style them as you wish. As a minimum we recommend the following styles.
+By default `kawo-tooltip.js` only defines essential styles. Both the tooltip and the arrow have the classes `.tt` and `.tt-arrow` applied to them so you can style them as you wish. 
+
+As a minimum we recommend the following styles:
 
 ```css
-.kawo-tooltip {
+.tt {
 	max-width: 200px;
 	padding: 5px 8px;
 	font-size: 14px;
@@ -55,7 +49,7 @@ By default `kawo-tooltip.js` only defines essential styles. Both the tooltip and
 	background-color: #333;
 }
 
-.kawo-tooltip-arrow {
+.tt-arrow {
 	border: 6px solid #333;
 	border-bottom-color: transparent;
 	border-right-color: transparent;
@@ -64,9 +58,9 @@ By default `kawo-tooltip.js` only defines essential styles. Both the tooltip and
 
 For reference when writing your CSS styles; this is what the tooltip HTML looks like:
 ```html
-<div class="kawo-tooltip" style="[...]">
+<div class="tt" style="[...]">
 	<span> ...content from data-tooltip attribute goes here... </span>
-	<div class="kawo-tooltip-arrow" style="[...]"></div>
+	<div class="tt-arrow" style="[...]"></div>
 </div>
 ```
 

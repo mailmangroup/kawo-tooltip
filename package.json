@@ -1,12 +1,58 @@
 {
-  "name": "kawo-tooltip",
-  "version": "1.0.6",
-  "main": "dist/kawo-tooltip.min.js",
-  "ignore": [
-    ".bowerrc",
-    ".gitignore",
-    ".gitattributes",
-    ".git/*",
-    "bower.json"
-  ]
+	"name": "@mailmangroup/kawo-tooltip",
+	"version": "2.0.5",
+	"author": "Alex Duncan <alex@kawo.com>",
+	"keywords": [
+		"tooltip"
+	],
+	"license": "MIT",
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
+	},
+	"main": "./dist/index.umd.cjs",
+	"module": "./dist/index.js",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.umd.cjs"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mailmangroup/kawo-tooltip.git"
+	},
+	"volta": {
+		"node": "16.19.0"
+	},
+	"homepage": "https://github.com/mailmangroup/kawo-tooltip",
+	"bugs": {
+		"url": "https://github.com/mailmangroup/kawo-tooltip/issues"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@types/node": "^20.2.5",
+		"@typescript-eslint/eslint-plugin": "^5.59.8",
+		"@typescript-eslint/parser": "^5.59.8",
+		"eslint": "^8.41.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"prettier": "^2.8.8",
+		"typescript": "^5.0.4",
+		"vite": "^4.3.9"
+	},
+	"ignore": [
+		".bowerrc",
+		".gitignore",
+		".gitattributes",
+		".git/*",
+		"bower.json"
+	]
 }
