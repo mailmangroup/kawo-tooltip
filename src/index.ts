@@ -12,13 +12,13 @@ const d = document;
 const b = d.body;
 
 // NUMBER OF MILLISECONDS DELAY FOR TOOLTIP TO APPEAR / DISAPPEAR
-const timeoutDelay: number = 500;
+const timeoutDelay = 500;
 
 // NUMBER OF PIXELS TO SHIFT TOOLTIP TO AVOID EDGE OF SCREEN
-const viewportMargin: number = 16;
+const viewportMargin = 16;
 
 // NUMBER OF PIXELS TO OFFSET ARROW BY
-const arrowCenterOffset: number = 5;
+const arrowCenterOffset = 5;
 
 // TOUCH DEVICE › DON'T SHOW TOOLTIPS
 if ('ontouchstart' in w) console.warn('No tooltips on touch devices.');
@@ -33,7 +33,9 @@ let hideTimeout: ReturnType<typeof setTimeout> | null;
 let targetPosition: string;
 
 // DISPLAY STATUS OF TOOLTIP
-let visible: boolean = false;
+let visible = false;
+
+let visibleTarget: Element | undefined;
 
 // CREATE HIDDEN TOOLTIP ELEMENT
 // -----------------------------------------------------------------------------
@@ -74,104 +76,20 @@ b.appendChild(tooltip);
 const hideTooltip = () => {
 	ts.visibility = 'hidden';
 	visible = false;
+	visibleTarget = undefined;
 };
+
+// TODO: DEBOUNCE WHEN WE IMPLEMENT MORE RELIABLE LOGIC
+// const debouncedMouseEnter = debounce(handleMouseEnter);
+// const debouncedMouseLeave = debounce(handleMouseLeave);
 
 // LISTEN TO MOUSEENTER EVENT TO DISPLAY TOOLTIP
 // -----------------------------------------------------------------------------
-b.addEventListener(
-	'mouseenter',
-	(e: MouseEvent) => {
-		let target: Element = e.target as Element;
-
-		// TARGET HAS 'data-tooltip' ATTRIBUTE
-		if (target.hasAttribute('data-tooltip')) {
-			// TEST TARGET CSS POSITION
-			targetPosition = w.getComputedStyle(target).getPropertyValue('position');
-
-			// HIDE TIMEOUT SET › CLEAR IT
-			if (hideTimeout) {
-				clearTimeout(hideTimeout);
-				hideTimeout = null;
-			}
-
-			// TOOLTIP NOT VISIBLE › FADEIN AFTER TIMEOUT
-			if (!visible)
-				showTimeout = setTimeout(() => {
-					ts.visibility = 'visible';
-					visible = true;
-				}, timeoutDelay);
-
-			// GET THE TEXT FOR THE TOOLTIP FROM THE 'data-tooltip' ATTRIBUTE
-			span.innerHTML = target.getAttribute('data-tooltip') as string;
-
-			// GET SIZE AND POSITION OF THE TOOLTIP ELEMENT
-			let tooltipSize: DOMRect = tooltip.getBoundingClientRect();
-
-			// GET SIZE AND POSITION OF THE TARGET ELEMENT
-			let targetSize: DOMRect = target.getBoundingClientRect();
-
-			// CALCULATE CENTER OF TARGET
-			let center: number = Math.round(targetSize.left + targetSize.width / 2);
-
-			// POSITION TOOLTIP
-			// -----------------------------------------------------------------
-			let tooltipTop: number = targetSize.bottom + 3;
-			let tooltipLeft: number = Math.round(center - tooltipSize.width / 2);
-			let tooltipAlign: 'center' | 'left' | 'right' = 'center';
-			let arrowLeft: number = Math.round(tooltipSize.width / 2 - arrowCenterOffset);
-			let arrowRotation: 45 | -135 = 45;
-
-			// IF TOOLTIP OFF BOTTOM OF SCREEN › POSITION ABOVE TARGET
-			if (targetSize.bottom + tooltipSize.height > w.innerHeight) {
-				tooltipTop = targetSize.top - tooltipSize.height - 3;
-				arrowRotation = -135;
-			}
-
-			// IF TOOLTIP OFF LEFT SIDE OF SCREEN › SHIFT RIGHT ONTO SCREEN
-			if (tooltipSize.width / 2 > center - viewportMargin) {
-				tooltipLeft = viewportMargin;
-				tooltipAlign = 'left';
-				arrowLeft = center - viewportMargin - arrowCenterOffset;
-			}
-
-			// IF OFF RIGHT SIDE OF SCREEN › SHIFT LEFT ONTO SCREEN
-			if (center + tooltipSize.width / 2 > w.innerWidth - viewportMargin) {
-				tooltipLeft = w.innerWidth - tooltipSize.width - viewportMargin;
-				tooltipAlign = 'right';
-				arrowLeft = center - tooltipLeft - arrowCenterOffset;
-			}
-
-			// FOR WHATEVER MINOR PERFORMANCE IMPROVEMENT THIS MAY PROVIDE
-			w.requestAnimationFrame(() => {
-				// APPLY POSITION TO TOOLTIP
-				ts.transform = `translate( ${tooltipLeft}px, ${tooltipTop}px )`;
-				ts.textAlign = tooltipAlign;
-
-				// APPLY POSITION TO ARROW
-				as.transform = `rotate(${arrowRotation}deg)`;
-				as.inset =
-					arrowRotation > 0
-						? `-5px auto auto ${arrowLeft}px`
-						: `auto auto -5px ${arrowLeft}px`;
-			});
-		}
-	},
-	true
-);
+b.addEventListener('mouseenter', handleMouseEnter, true);
 
 // LISTEN TO MOUSELEAVE EVENT TO HIDE TOOLTIP
 // -----------------------------------------------------------------------------
-b.addEventListener(
-	'mouseleave',
-	() => {
-		// IF A SHOW TIMEOUT IS SET CLEAR IT
-		if (showTimeout) clearTimeout(showTimeout);
-
-		// IF A TOOLTIP IS VISIBLE & NO TIMEOUT › SET TIMEOUT
-		if (visible && !hideTimeout) hideTimeout = setTimeout(hideTooltip, timeoutDelay);
-	},
-	true
-);
+b.addEventListener('mouseleave', handleMouseLeave, true);
 
 // ON CLICK › HIDE TOOLTIP
 b.addEventListener('click', hideTooltip, true);
@@ -185,5 +103,104 @@ d.addEventListener(
 	true
 );
 
-// REQUIRED TO KEEP ESLINT HAPPY, BUT IS REMOVED BY BUILD PROCESS
-export {};
+function handleMouseEnter(e: MouseEvent) {
+	const target: Element = e.target as Element;
+
+	// TARGET HAS 'data-tooltip' ATTRIBUTE
+	if (target.hasAttribute('data-tooltip') || target.closest('[data-tooltip]')) {
+		visibleTarget = target;
+
+		// TEST TARGET CSS POSITION
+		targetPosition = w.getComputedStyle(target).getPropertyValue('position');
+
+		// HIDE TIMEOUT SET › CLEAR IT
+		if (hideTimeout) {
+			clearTimeout(hideTimeout);
+			hideTimeout = null;
+		}
+
+		// TOOLTIP NOT VISIBLE › FADEIN AFTER TIMEOUT
+		if (!visible)
+			showTimeout = setTimeout(() => {
+				ts.visibility = 'visible';
+				visible = true;
+			}, timeoutDelay);
+
+		// GET THE TEXT FOR THE TOOLTIP FROM THE 'data-tooltip' ATTRIBUTE
+		span.innerHTML = target.getAttribute('data-tooltip') as string;
+
+		// GET SIZE AND POSITION OF THE TOOLTIP ELEMENT
+		const tooltipSize: DOMRect = tooltip.getBoundingClientRect();
+
+		// GET SIZE AND POSITION OF THE TARGET ELEMENT
+		const targetSize: DOMRect = target.getBoundingClientRect();
+
+		// CALCULATE CENTER OF TARGET
+		const center: number = Math.round(targetSize.left + targetSize.width / 2);
+
+		// POSITION TOOLTIP
+		// -----------------------------------------------------------------
+		let tooltipTop: number = targetSize.bottom + 3;
+		let tooltipLeft: number = Math.round(center - tooltipSize.width / 2);
+		let tooltipAlign: 'center' | 'left' | 'right' = 'center';
+		let arrowLeft: number = Math.round(tooltipSize.width / 2 - arrowCenterOffset);
+		let arrowRotation: 45 | -135 = 45;
+
+		// IF TOOLTIP OFF BOTTOM OF SCREEN › POSITION ABOVE TARGET
+		if (targetSize.bottom + tooltipSize.height > w.innerHeight) {
+			tooltipTop = targetSize.top - tooltipSize.height - 3;
+			arrowRotation = -135;
+		}
+
+		// IF TOOLTIP OFF LEFT SIDE OF SCREEN › SHIFT RIGHT ONTO SCREEN
+		if (tooltipSize.width / 2 > center - viewportMargin) {
+			tooltipLeft = viewportMargin;
+			tooltipAlign = 'left';
+			arrowLeft = center - viewportMargin - arrowCenterOffset;
+		}
+
+		// IF OFF RIGHT SIDE OF SCREEN › SHIFT LEFT ONTO SCREEN
+		if (center + tooltipSize.width / 2 > w.innerWidth - viewportMargin) {
+			tooltipLeft = w.innerWidth - tooltipSize.width - viewportMargin;
+			tooltipAlign = 'right';
+			arrowLeft = center - tooltipLeft - arrowCenterOffset;
+		}
+
+		// FOR WHATEVER MINOR PERFORMANCE IMPROVEMENT THIS MAY PROVIDE
+		w.requestAnimationFrame(() => {
+			// APPLY POSITION TO TOOLTIP
+			ts.transform = `translate( ${tooltipLeft}px, ${tooltipTop}px )`;
+			ts.textAlign = tooltipAlign;
+
+			// APPLY POSITION TO ARROW
+			as.transform = `rotate(${arrowRotation}deg)`;
+			as.inset =
+				arrowRotation > 0
+					? `-5px auto auto ${arrowLeft}px`
+					: `auto auto -5px ${arrowLeft}px`;
+		});
+	}
+}
+
+function handleMouseLeave(e: MouseEvent) {
+	// DONT HIDE TOOLTIP IF WE'RE STILL INSIDE THE TARGET ELEMENT
+	if (e.relatedTarget instanceof Node && visibleTarget?.contains(e.relatedTarget)) return;
+
+	// IF A SHOW TIMEOUT IS SET CLEAR IT
+	if (showTimeout) clearTimeout(showTimeout);
+
+	// IF A TOOLTIP IS VISIBLE & NO TIMEOUT › SET TIMEOUT
+	if (visible && !hideTimeout) hideTimeout = setTimeout(hideTooltip, timeoutDelay);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function debounce(callback: (...params: any[]) => void, duration = 0) {
+	let timeoutId: number;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return (...args: any) => {
+		window.clearTimeout(timeoutId);
+		timeoutId = window.setTimeout(() => {
+			callback(...args);
+		}, duration);
+	};
+}
