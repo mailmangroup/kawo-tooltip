@@ -85,7 +85,6 @@ b.addEventListener(
 
 		// TARGET HAS 'data-tooltip' ATTRIBUTE
 		if (target.hasAttribute('data-tooltip')) {
-			console.error(target);
 			// TEST TARGET CSS POSITION
 			targetPosition = w.getComputedStyle(target).getPropertyValue('position');
 
