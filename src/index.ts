@@ -107,7 +107,7 @@ function handleMouseEnter(e: MouseEvent) {
 	const target: Element = e.target as Element;
 
 	// TARGET HAS 'data-tooltip' ATTRIBUTE
-	if (target.hasAttribute('data-tooltip') || target.closest('[data-tooltip]')) {
+	if (target.hasAttribute('data-tooltip')) {
 		visibleTarget = target;
 
 		// TEST TARGET CSS POSITION
