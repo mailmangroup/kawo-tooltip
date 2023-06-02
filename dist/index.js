@@ -21,7 +21,7 @@ const x = () => {
   t.visibility = "hidden", c = !1;
 };
 f.addEventListener(
-  "mouseenter",
+  "mouseover",
   (L) => {
     let u = L.target;
     if (u.hasAttribute("data-tooltip")) {

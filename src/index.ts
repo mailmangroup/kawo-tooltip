@@ -79,7 +79,7 @@ const hideTooltip = () => {
 // LISTEN TO MOUSEENTER EVENT TO DISPLAY TOOLTIP
 // -----------------------------------------------------------------------------
 b.addEventListener(
-	'mouseenter',
+	'mouseover',
 	(e: MouseEvent) => {
 		let target: Element = e.target as Element;
 
