@@ -10,6 +10,9 @@
 	"files": [
 		"dist"
 	],
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
+	},
 	"main": "./dist/index.umd.cjs",
 	"module": "./dist/index.js",
 	"exports": {
