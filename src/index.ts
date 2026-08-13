@@ -91,8 +91,9 @@ b.addEventListener('mouseenter', handleMouseEnter, true);
 // -----------------------------------------------------------------------------
 b.addEventListener('mouseleave', handleMouseLeave, true);
 
-// ON CLICK › HIDE TOOLTIP
+// ON CLICK OR POINTER DOWN › HIDE TOOLTIP
 b.addEventListener('click', hideTooltip, true);
+b.addEventListener('pointerdown', hideTooltip, true);
 
 // ON MAIN WINDOW SCROLL › HIDE TOOLTIP
 d.addEventListener(
