@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>KAWO Tooltip V2</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+
+		<style>
+			/* FORCE BODY HEIGHT TO TEST SCROLLING */
+			body {
+				height: 120vh;
+				font-family: sans-serif;
+			}
+
+			/* RECOMMENDED TOOLTIP STYLES */
+
+			.kawo-tooltip {
+				max-width: 14rem;
+				padding: 0.375rem 0.5rem;
+				font-size: 0.875rem;
+				color: #fff;
+				background-color: #333;
+				border-radius: 0.25rem;
+			}
+
+			.kawo-tooltip-arrow {
+				border: 0.375rem solid #333;
+				border-radius: 1px;
+				border-bottom-color: transparent;
+				border-right-color: transparent;
+			}
+
+			/* OPTIONAL EXTRAS TOOLTIP STYLES */
+
+			.kawo-tooltip small {
+				font-size: 12px;
+				color: #ddd;
+			}
+		</style>
+
+		<style>
+			main {
+				margin-top: 25vh;
+				text-align: center;
+				color: #333;
+			}
+
+			p {
+				color: #555;
+			}
+
+			/* EXAMPLE ELEMENT STYLES */
+
+			.box {
+				width: 44px;
+				height: 44px;
+				position: fixed;
+				background-color: #eeeeee;
+				border-radius: 5px;
+			}
+
+			.top-right {
+				top: 20px;
+				right: 20px;
+			}
+
+			.top-right-70 {
+				top: 20px;
+				right: 70px;
+			}
+
+			.top-70-right {
+				top: 70px;
+				right: 20px;
+			}
+
+			.top-center {
+				top: 20px;
+				left: 50%;
+				margin-left: -22px;
+			}
+
+			.top-left {
+				top: 20px;
+				left: 20px;
+			}
+
+			.bottom-right {
+				bottom: 20px;
+				right: 20px;
+			}
+
+			.bottom-center {
+				bottom: 20px;
+				left: 50%;
+				margin-left: -22px;
+			}
+
+			.bottom-left {
+				bottom: 20px;
+				left: 20px;
+			}
+
+			.center-center {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin: -22px 0 0 -22px;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>KAWO Tooltip</h1>
+			<p>v2.0.0</p>
+		</main>
+
+		<div
+			class="box top-right"
+			data-tooltip="top right"
+		>
+			<div>Hey</div>
+		</div>
+
+		<div
+			class="box top-right-70"
+			data-tooltip="top right 70px"
+		>
+			<div>Hey</div>
+		</div>
+
+		<div
+			class="box top-70-right"
+			data-tooltip="top 70px right"
+		></div>
+
+		<div
+			class="box top-center"
+			data-tooltip="top center<br /><small>can also contain html tags</small>"
+		></div>
+
+		<div
+			class="box top-left"
+			data-tooltip="top left but<br />way way way<br />too much<br />damn text"
+		></div>
+
+		<div
+			class="box bottom-right"
+			data-tooltip="bottom right"
+		></div>
+
+		<div
+			class="box bottom-center"
+			data-tooltip="bottom center but way way way too much damn text"
+		></div>
+
+		<div
+			class="box bottom-left"
+			data-tooltip="bottom left"
+		></div>
+
+		<div
+			class="box center-center"
+			data-tooltip="center center"
+		></div>
+
+		<div class="tabs">
+			<a
+				href="/:org/:brand/competitors?layout=grid"
+				class="tabs__button"
+				data-tooltip="网格"
+				><i
+					><svg
+						class="feather feather-tabler-layout-2"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="currentColor"
+						stroke="none"
+						stroke-width="2"
+					>
+						<g
+							fill="none"
+							stroke="currentColor"
+						>
+							<path
+								d="M0 0h24v24H0z"
+								fill="none"
+								stroke="none"
+							></path>
+							<g transform="matrix(1.14 0 0 1.14 -1.71 -1.71)">
+								<rect
+									x="4"
+									y="4"
+									width="6"
+									height="5"
+									rx="2"
+								></rect>
+								<rect
+									x="4"
+									y="13"
+									width="6"
+									height="7"
+									rx="2"
+								></rect>
+								<rect
+									x="14"
+									y="4"
+									width="6"
+									height="7"
+									rx="2"
+								></rect>
+								<rect
+									x="14"
+									y="15"
+									width="6"
+									height="5"
+									rx="2"
+								></rect>
+							</g>
+						</g></svg></i></a
+			><a
+				href="/:org/:brand/competitors?layout=table"
+				class="tabs__button"
+				data-tooltip="列表"
+				><i
+					><svg
+						class="feather feather-table-icon"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="currentColor"
+						stroke="none"
+						stroke-width="2"
+					>
+						<g
+							fill="none"
+							stroke="currentColor"
+						>
+							<path
+								d="m19.1 2.59c1.56 0 2.84 1.21 2.93 2.75l0.0062 0.193v12.9c0 1.56-1.21 2.84-2.75 2.93l-0.193 0.0062h-14.1c-1.56 0-2.84-1.21-2.93-2.75l-0.00624-0.193v-12.9c0-1.56 1.21-2.84 2.75-2.93l0.193-0.00626zm-7.65 12.9h-8.24v2.94c0 0.917 0.7 1.67 1.59 1.76l0.17 0.0081h6.47zm9.41 0h-8.24v4.71h6.47c0.917 0 1.67-0.7 1.76-1.59l0.0081-0.17zm-9.41-5.88h-8.24v4.71h8.24zm9.41 0h-8.24v4.71h8.24zm-9.41-5.88h-6.47c-0.917 0-1.67 0.7-1.76 1.59l-0.00812 0.17v2.94h8.24zm7.65 0h-6.47v4.71h8.24v-2.94c0-0.917-0.7-1.67-1.59-1.76z"
+								fill="currentColor"
+								fill-rule="evenodd"
+								stroke="none"
+							></path>
+						</g></svg></i></a
+			><a
+				href="/:org/:brand/competitors?layout=wordCloud"
+				class="tabs__button tabs__button_active"
+				data-tooltip="词云"
+				><i
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg></i
+			></a>
+		</div>
+
+		<link
+			rel="stylesheet"
+			href="./main.css"
+		/>
+
+		<script
+			type="module"
+			src="./src/index.ts"
+		></script>
+	</body>
+</html>

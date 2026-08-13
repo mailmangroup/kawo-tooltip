@@ -1,0 +1,17 @@
+.tabs {
+	display: flex;
+	gap: 4px;
+	padding: 2px;
+}
+
+.tabs__button {
+	width: 40px;
+	height: 40px;
+	display: grid;
+	place-items: center;
+}
+
+.tabs__button svg {
+	width: 36px;
+	height: 36px;
+}
